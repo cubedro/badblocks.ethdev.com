@@ -16,14 +16,14 @@ var validator = require('./lib/validator');
 
 // App setup
 app.set('port', process.env.PORT || 3005);
-app.set('views', path.join(__dirname, 'src/views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'src/views'));
+// app.set('view engine', 'jade');
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(jsonrpc());
-app.use(express.static(path.join(__dirname, 'dist')));
 
 
 
@@ -32,9 +32,9 @@ if( process.env.NODE_ENV === 'development')
 	app.use(errorHandler());
 }
 
-app.get('/', function (req, res) {
-	res.render('index');
-});
+// app.get('/', function (req, res) {
+// 	res.render('index');
+// });
 
 app.post('/', function (req, res)
 {

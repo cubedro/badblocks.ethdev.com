@@ -55,7 +55,7 @@ table td {
 
 .text-gray .propagationBox {
 	background: none !important;
-	border: 1px solid #777;
+	border: 1px solid #888;
 }
 
 .bg-success,
@@ -63,11 +63,11 @@ table td {
 .bg-warning,
 .bg-orange,
 .bg-danger {
-	color: #000;
+	color: #fff;
 }
 
 .text-gray {
-	color: #777 !important;
+	color: #888 !important;
 }
 
 .text-orange {
@@ -80,7 +80,7 @@ table td {
 }
 
 .stat-holder {
-	background: #090909;
+	background: #f6f6f6;
 	border: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -180,7 +180,7 @@ span.small-title span.small {
 	letter-spacing: -0.1px;
 	text-transform: none;
 	white-space: nowrap;
-	color: #777;
+	color: #888;
 }
 
 .blocks-holder .block-count {
@@ -400,7 +400,7 @@ nodepropagchart {
 	width: auto;
 	left: -50%;
 	text-align: center;
-	color: #333;
+	color: #ccc;
 	border: none !important;
 	box-shadow: none !important;
 	border-radius: 3px !important;
@@ -455,7 +455,7 @@ svg .axis line {
 	shape-rendering: crispEdges;
 }
 svg .axis text {
-	fill: #777;
+	fill: #888;
 	font-size: 10px;
 	letter-spacing: 0px;
 	font-family: "Source Sans Pro";
