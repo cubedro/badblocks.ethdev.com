@@ -255,7 +255,7 @@ table i {
 
 table th,
 table td {
-	border-color: #222 !important;
+	border-color: #ddd !important;
 }
 
 table td {
@@ -377,7 +377,7 @@ nodepropagchart {
 	left: 50%;
 	margin-left: -5px;
 	border-width: 5px 5px 0;
-	border-top-color: #fff;
+	border-top-color: #000;
 }
 
 .datamaps-hoverover .tooltip-arrow,
@@ -387,7 +387,7 @@ nodepropagchart {
 	left: 0px;
 	margin-left: -5px;
 	border-width: 0px 5px 5px 5px;
-	border-bottom-color: #fff;
+	border-bottom-color: #000;
 }
 
 .d3-tip .tooltip-arrow {
