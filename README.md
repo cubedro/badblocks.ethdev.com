@@ -2,7 +2,7 @@ Ethereum Bad Block Reporting tool
 ============
 [![Build Status][travis-image]][travis-url] [![dependency status][dep-image]][dep-url]
 
-This is a tool for reporting bad blocks on Ethereum.
+This is a tool for reporting bad blocks on Ethereum. If you want to find out how you can submit a bad block you can find [more info here](https://github.com/ethereum/wiki/wiki/Bad-Block-Reporting).
 
 ![Screenshot](https://raw.githubusercontent.com/cubedro/badblock.ethdev.com/master/src/images/screenshot.jpg "Screenshot")
 
