@@ -1,36 +1,48 @@
 'use strict'
 
+// Load utilities
+var config = require('./lib/utils/config');
+var util = require('util');
 var _ = require('lodash');
+var validator = require('./lib/validator');
+
+// Init the db
+var mongoose = require('mongoose');
+mongoose.connect(config.db_uri, config.db_options, function (err, res)
+{
+	if (err) {
+		console.error('ERROR connecting to:', config.db_uri, err);
+	} else {
+		console.log('Connected to:', config.db_uri);
+	}
+});
+var Report = require('./lib/model')(mongoose);
+
 
 // Init http server
 var express = require('express');
 var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
-var errorHandler = require('errorhandler');
 var jsonrpc = require('node-express-json-rpc2');
-var morgan = require('morgan');
-var util = require('util');
 
-var validator = require('./lib/validator');
 
 // App setup
 app.set('port', process.env.PORT || 3005);
-// app.set('views', path.join(__dirname, 'src/views'));
-// app.set('view engine', 'jade');
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(jsonrpc());
-
-
-
-if( process.env.NODE_ENV === 'development')
+if( process.env.NODE_ENV !== 'production')
 {
+	var path = require('path');
+	var bodyParser = require('body-parser');
+	var errorHandler = require('errorhandler');
+	var morgan = require('morgan');
+
+	app.use(morgan('dev'));
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(express.static(path.join(__dirname, 'dist')));
 	app.use(errorHandler());
 }
+
+app.use(jsonrpc());
 
 // app.get('/', function (req, res) {
 // 	res.render('index');
@@ -40,15 +52,19 @@ app.post('/', function (req, res)
 {
 	res.rpc('eth_badBlock', function (params, respond)
 	{
-		validator(params, req.ip, function(err, ok)
+		var result = validator(params, req.ip);
+
+		var r = new Report(result);
+
+		r.save(function (err)
 		{
-			if(err !== null)
-			{
-				respond(err);
+			if (err) {
+				console.error(err);
+				respond(jsonrpc.INVALID_PARAMS);
 			}
-			else
-			{
-				respond({result: ok});
+			else {
+				console.log(result);
+				respond('ok');
 			}
 		});
 	});
