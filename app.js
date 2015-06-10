@@ -40,7 +40,7 @@ app.post('/', function (req, res)
 {
 	res.rpc('eth_badBlock', function (params, respond)
 	{
-		validator(params, function(err, ok)
+		validator(params, req.ip, function(err, ok)
 		{
 			if(err !== null)
 			{

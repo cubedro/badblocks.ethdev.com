@@ -20,6 +20,7 @@
     "geoip-lite": "1.1.6",
     "jade": "1.9.1",
     "lodash": "3.9.3",
+    "mongoose": "^4.0.5",
     "morgan": "^1.5.3",
     "node-express-json-rpc2": "^1.0.2",
     "primus": "3.0.2",
