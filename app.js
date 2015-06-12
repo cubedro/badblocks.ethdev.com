@@ -60,11 +60,11 @@ app.post('/', function (req, res)
 		{
 			if (err) {
 				console.error(err);
-				respond(jsonrpc.INVALID_PARAMS);
+				respond({error: jsonrpc.INVALID_PARAMS, result: null});
 			}
 			else {
 				console.log(result);
-				respond('ok');
+				respond({error: null, result: 'ok'});
 			}
 		});
 	});
@@ -75,5 +75,20 @@ var server = require('http').createServer(app);
 server.listen(app.get('port'), function(){
 	console.log('Server started on port', app.get('port'));
 });
+
+var gracefulShutdown = function() {
+	console.log('');
+    console.error("xxx", "sys", "Received kill signal, shutting down gracefully.");
+
+    mongoose.disconnect();
+
+    process.exit(0);
+}
+
+// listen for TERM signal .e.g. kill
+process.on('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on('SIGINT', gracefulShutdown);
 
 module.exports = server;
