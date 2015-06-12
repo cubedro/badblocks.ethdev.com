@@ -36,10 +36,10 @@ if( process.env.NODE_ENV !== 'production')
 	var morgan = require('morgan');
 
 	app.use(morgan('dev'));
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: false }));
+	// app.use(bodyParser.json());
+	// app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(express.static(path.join(__dirname, 'dist')));
-	app.use(errorHandler());
+	// app.use(errorHandler());
 }
 
 app.use(jsonrpc());
