@@ -1,10 +1,9 @@
 'use strict'
 
 // Load utilities
-var config = require('./lib/utils/config');
-var util = require('util');
 var _ = require('lodash');
-var validator = require('./lib/validator');
+var config = require('./lib/utils/config');
+var formatter = require('./lib/formatter');
 
 // Init the db
 var mongoose = require('mongoose');
@@ -53,7 +52,7 @@ app.post('/', function (req, res)
 {
 	res.rpc('eth_badBlock', function (params, respond)
 	{
-		var result = validator(params, req.ip);
+		var result = formatter(params, req.ip);
 
 		var r = new Report(result);
 
@@ -73,7 +72,6 @@ app.post('/', function (req, res)
 });
 
 var server = http.createServer(app);
-http.globalAgent.maxSockets = 20;
 
 server.listen(app.get('port'), function(){
 	console.log('Server started on port', app.get('port'));
