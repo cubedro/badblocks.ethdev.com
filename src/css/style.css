@@ -292,8 +292,8 @@ nodepropagchart {
 
 .th-nodecheck,
 .td-nodecheck {
-	width: 38px;
-	text-align: center;
+	width: 50px;
+	/*text-align: center;*/
 }
 
 .td-nodecheck i {

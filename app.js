@@ -3,7 +3,7 @@
 // Load utilities
 var _ = require('lodash');
 var config = require('./lib/utils/config');
-var formatter = require('./lib/formatter');
+var formatter = require('./lib/utils/formatter');
 
 // Init the db
 var mongoose = require('mongoose');
@@ -36,17 +36,11 @@ if( process.env.NODE_ENV !== 'production')
 	var morgan = require('morgan');
 
 	app.use(morgan('dev'));
-	// app.use(bodyParser.json());
-	// app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(express.static(path.join(__dirname, 'dist')));
 	app.use(errorHandler());
 }
 
 app.use(jsonrpc());
-
-// app.get('/', function (req, res) {
-// 	res.render('index');
-// });
 
 app.post('/', function (req, res)
 {
