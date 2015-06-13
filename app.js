@@ -20,6 +20,7 @@ var Report = require('./lib/model')(mongoose);
 
 
 // Init http server
+var http = require('http');
 var express = require('express');
 var app = express();
 var jsonrpc = require('node-express-json-rpc2');
@@ -71,7 +72,8 @@ app.post('/', function (req, res)
 	});
 });
 
-var server = require('http').createServer(app);
+var server = http.createServer(app);
+http.globalAgent.maxSockets = 20;
 
 server.listen(app.get('port'), function(){
 	console.log('Server started on port', app.get('port'));
