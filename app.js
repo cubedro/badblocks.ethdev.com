@@ -39,7 +39,7 @@ if( process.env.NODE_ENV !== 'production')
 	// app.use(bodyParser.json());
 	// app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(express.static(path.join(__dirname, 'dist')));
-	// app.use(errorHandler());
+	app.use(errorHandler());
 }
 
 app.use(jsonrpc());
@@ -56,17 +56,18 @@ app.post('/', function (req, res)
 
 		var r = new Report(result);
 
-		r.save(function (err)
+		var err = r.validateSync();
+
+		if( err )
 		{
-			if (err) {
-				console.error(err);
-				respond({error: jsonrpc.INVALID_PARAMS, result: null});
-			}
-			else {
-				console.log(result);
-				respond({error: null, result: 'ok'});
-			}
-		});
+			console.error(err);
+			respond(jsonrpc.INVALID_PARAMS);
+		}
+		else {
+			r.save();
+			console.info(result);
+			respond({error: null, result: 'ok'});
+		}
 	});
 });
 
