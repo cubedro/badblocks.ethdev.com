@@ -1,8 +1,60 @@
+function format ( d ) {
+	return d.toString();
+}
+
 (function() {
 	$('body').on('mouseenter', '[data-toggle="tooltip"]', function( event ) {
 		$(this).tooltip('show');
 	}).on('mouseleave', '[data-toggle="tooltip"]', function( event ) {
 		$(this).tooltip('hide');
+	});
+
+	var badBlocks = $('#reportsTable').dataTable({
+		"bProcessing" : true,
+		"bServerSide" : true,
+		"sAjaxSource" : '/mongo/get/datatable',
+		"columns": [
+			{
+				"class" : "details-control",
+				"data" : "block"
+			},
+			{ "data" : "errorType" },
+			{ "data" : "category" },
+			{ "data" : "ip" },
+			{ "data" : "createdAt" }
+		],
+		"order": [[4, 'desc']]
+	});
+
+	var detailRows = [];
+
+	$('#example tbody').on( 'click', 'tr td.details-control', function () {
+		var tr = $(this).closest('tr');
+		var row = dt.row( tr );
+		var idx = $.inArray( tr.attr('id'), detailRows );
+
+		if ( row.child.isShown() ) {
+			tr.removeClass( 'details' );
+			row.child.hide();
+
+			// Remove from the 'open' array
+			detailRows.splice( idx, 1 );
+		}
+		else {
+			tr.addClass( 'details' );
+			row.child( format( row.data() ) ).show();
+
+			// Add to the 'open' array
+			if ( idx === -1 ) {
+				detailRows.push( tr.attr('id') );
+			}
+		}
+	} );
+
+	badBlocks.on( 'draw', function () {
+		$.each( detailRows, function ( i, id ) {
+			$('#'+id+' td.details-control').trigger( 'click' );
+		});
 	});
 })();
 
