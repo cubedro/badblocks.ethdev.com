@@ -57,7 +57,8 @@ app.post('/', function (req, res)
 			console.error(err);
 			respond(jsonrpc.INVALID_PARAMS);
 		}
-		else {
+		else
+		{
 			r.save();
 			console.info(result);
 			respond({error: null, result: 'ok'});

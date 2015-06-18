@@ -2,34 +2,17 @@ var src = 'src/';
 var dest = 'dist/';
 
 var scripts = [
-	'src/js/app.js',
-	'src/js/controllers.js',
-	'src/js/filters.js',
-	'src/js/directives.js',
 	'src/js/script.js'
 ];
 
 var vendor = [
 	'dist/js/lib/jquery-1.11.3.min.js',
 	'dist/js/lib/bootstrap.min.js',
-	'dist/js/lib/angular.min.js',
-	'dist/js/lib/ngStorage.min.js',
-	'dist/js/lib/lodash.min.js',
-	'dist/js/lib/d3.min.js',
-	'dist/js/lib/d3.tip.min.js',
-	'dist/js/lib/topojson.min.js',
-	'dist/js/lib/datamaps.min.js',
-	'dist/js/lib/moment.min.js',
-	'dist/js/lib/moment.en.min.js',
-	'dist/js/lib/toastr.min.js',
-	'dist/js/lib/jquery.sparkline.min.js',
-	'dist/js/lib/primus.min.js'
 ];
 
 var styles = [
 	'bootstrap.min.css',
 	'minimal-icons-embedded.css',
-	'toastr.min.css',
 	'style.css'
 ];
 
@@ -38,8 +21,8 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			build: ['dist'],
-			cleanup_js: ['dist/js/*.*', '!dist/js/netstats.*'],
-			cleanup_css: ['dist/css/*.css', '!dist/css/netstats.*.css']
+			cleanup_js: ['dist/js/*.*', '!dist/js/badblocks.*'],
+			cleanup_css: ['dist/css/*.css', '!dist/css/badblocks.*.css']
 		},
 		jade: {
 			build: {
@@ -114,19 +97,19 @@ module.exports = function(grunt) {
 				src: scripts,
 				dest: 'dist/js/app.js'
 			},
-			netstats: {
+			badblocks: {
 				options: {
 					sourceMap: true,
 					sourceMapIncludeSources: true,
 					sourceMapIn: ['dist/js/vendor.min.js.map', 'dist/js/app.min.js.map']
 				},
 				src: ['<%= concat.vendor.dest %>', '<%= uglify.app.dest %>'],
-				dest: 'dist/js/netstats.min.js',
+				dest: 'dist/js/badblocks.min.js',
 				nonull: true,
 			},
 			css: {
 				src: ['dist/css/*.min.css', 'dist/css/*.css'],
-				dest: 'dist/css/netstats.min.css'
+				dest: 'dist/css/badblocks.min.css'
 			}
 		},
 		uglify: {
@@ -149,7 +132,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	// grunt.registerTask('default', ['clean', 'jade', 'copy', 'cssmin', 'concat:vendor', 'concat:scripts', 'uglify', 'concat:netstats', 'concat:css', 'clean:cleanup_css']);
-	grunt.registerTask('default', ['clean', 'jade', 'copy', 'cssmin', 'concat:vendor', 'concat:scripts', 'uglify', 'concat:netstats', 'concat:css', 'clean:cleanup_js', 'clean:cleanup_css']);
+	// grunt.registerTask('default', ['clean', 'jade', 'copy', 'cssmin', 'concat:vendor', 'concat:scripts', 'uglify', 'concat:badblocks', 'concat:css', 'clean:cleanup_css']);
+	grunt.registerTask('default', ['clean', 'jade', 'copy', 'cssmin', 'concat:vendor', 'concat:scripts', 'uglify', 'concat:badblocks', 'concat:css', 'clean:cleanup_js', 'clean:cleanup_css']);
 	grunt.registerTask('build',   'default');
 };
