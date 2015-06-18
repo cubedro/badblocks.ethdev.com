@@ -8,11 +8,14 @@ var scripts = [
 var vendor = [
 	'dist/js/lib/jquery-1.11.3.min.js',
 	'dist/js/lib/bootstrap.min.js',
+	'dist/js/lib/jquery.dataTables.min.js',
 ];
 
 var styles = [
 	'bootstrap.min.css',
 	'minimal-icons-embedded.css',
+	'jquery.dataTables.css',
+	'bootstrap.TableTools.css',
 	'style.css'
 ];
 
@@ -52,6 +55,13 @@ module.exports = function(grunt) {
 						cwd: 'src/images/',
 						src: ['*.ico'],
 						dest: 'dist/',
+						filter: 'isFile'
+					},
+					{
+						expand: true,
+						cwd: 'src/images/',
+						src: ['*.*', '!*.ico'],
+						dest: 'dist/images/',
 						filter: 'isFile'
 					},
 					{
