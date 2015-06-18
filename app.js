@@ -7,6 +7,9 @@ var formatter = require('./lib/utils/formatter');
 
 // Init the db
 var mongoose = require('mongoose');
+var DataTable = require('mongoose-datatable');
+DataTable.configure({ verbose: false, debug : false });
+mongoose.plugin(DataTable.init);
 mongoose.connect(config.db_uri, config.db_options, function (err, res)
 {
 	if (err) {
@@ -41,6 +44,13 @@ if( process.env.NODE_ENV !== 'production')
 }
 
 app.use(jsonrpc());
+
+app.get('/mongo/get/datatable', function (req, res)
+{
+	Report.dataTable(req.query, function (err, data) {
+		res.send(data);
+	});
+});
 
 app.post('/', function (req, res)
 {

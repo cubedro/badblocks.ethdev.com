@@ -2,6 +2,7 @@ var src = 'src/';
 var dest = 'dist/';
 
 var scripts = [
+	'dist/js/lib/dataTables.bootstrap.js',
 	'src/js/script.js'
 ];
 
@@ -14,8 +15,8 @@ var vendor = [
 var styles = [
 	'bootstrap.min.css',
 	'minimal-icons-embedded.css',
-	'jquery.dataTables.css',
-	'bootstrap.TableTools.css',
+	// 'jquery.dataTables.css',
+	'dataTables.bootstrap.css',
 	'style.css'
 ];
 
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: 'src/fonts/',
-						src: ['minimal-*.*'],
+						src: ['*.*'],
 						dest: 'dist/fonts/',
 						filter: 'isFile'
 					},
