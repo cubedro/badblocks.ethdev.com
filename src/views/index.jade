@@ -2,8 +2,8 @@
 extends ./layout.jade
 
 block content
-  div.container-fluid(ng-controller='StatsCtrl')
-    div.row(ng-cloak, style="padding-top: 10px")
+  div.container-fluid
+    div.row
       h1 Ethereum Bad Blocks
       table.table.table-striped
         thead
@@ -14,8 +14,8 @@ block content
             th.th-latency Category
             th(style="width: 100px;") IP
             th(style="width: 120px;") Date
-        tbody(ng-cloak)
-          tr(ng-repeat='report in reports | orderBy:predicate track by report.id', id="report_{{report.id}}")
+        tbody
+          tr
             td.td-reportcheck 1
             td {{ report.block }}
             td {{ report.errortype }}
