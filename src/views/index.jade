@@ -4,16 +4,22 @@ extends ./layout.jade
 block content
   div.container-fluid
     div.row
-      h1 Ethereum Bad Blocks
-      table#reportsTable.table.table-striped
-        thead
-          tr.text-info
-            th.th-nodecheck #
-            th.th-nodename Block
-            th.th-nodetype Error Type
-            th.th-latency Category
-            th(style="width: 100px;") IP
-            th(style="width: 120px;") Date
-        tbody
-          tr
-            td No bad block reports found
+      div.col-xs-12
+        h1 Ethereum Bad Blocks
+        table#reportsTable.table.table-striped(width="100%")
+          thead
+            tr.text-info
+              th.th-nodecheck #
+              th.th-nodename Block
+              th.th-nodetype Error Type
+              th.th-latency Category
+              th(style="width: 100px;") IP
+              th(style="width: 120px;") Date
+          tbody
+            tr
+              td
+              td No bad block reports found
+              td
+              td
+              td
+              td

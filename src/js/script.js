@@ -1,5 +1,5 @@
 function format ( d ) {
-	return d.toString();
+	return "<pre><code>" + JSON.stringify(d.info, null, '\t') + "</code></pre>";
 }
 
 (function() {
@@ -9,28 +9,51 @@ function format ( d ) {
 		$(this).tooltip('hide');
 	});
 
-	var badBlocks = $('#reportsTable').dataTable({
-		"bProcessing" : true,
-		"bServerSide" : true,
-		"sAjaxSource" : '/mongo/get/datatable',
+	var page = 1;
+
+	var badBlocks = $('#reportsTable').DataTable({
+		"processing" : true,
+		"serverSide" : true,
+		"ajax" : '/mongo/get/datatable',
 		"columns": [
 			{
-				"class" : "details-control",
-				"data" : "block"
+				"class" : "counter",
+				"name" : "index",
+				"data" : function (row, type, set, meta) {
+					if(typeof meta !== 'undefined')
+						return meta.row + 1 + badBlocks.page.info().start;
+
+					return 0;
+				},
+				"orderable" : false,
+				"searchable" : false,
+				// "defaultContent" : ""
 			},
-			{ "data" : "errorType" },
-			{ "data" : "category" },
-			{ "data" : "ip" },
-			{ "data" : "createdAt" }
+			{
+				"class" : "details-control",
+				"mData" : "block",
+				"name" : "block"
+			},
+			{ "mData" : "errorType", "name" : "errorType" },
+			{ "mData" : "category", "name" : "category" },
+			{ "mData" : "ip", "name" : "ip" },
+			{ "mData" : "createdAt", "name" : "createdAt" },
+			{
+				"mData" : "info",
+				"name" : "info",
+				"orderable" : false,
+				"searchable" : false,
+				"visible" : false
+			}
 		],
-		"order": [[4, 'desc']]
+		"order": [[5, 'desc']]
 	});
 
 	var detailRows = [];
 
-	$('#example tbody').on( 'click', 'tr td.details-control', function () {
+	$('#reportsTable tbody').on( 'click', 'tr td.details-control', function () {
 		var tr = $(this).closest('tr');
-		var row = dt.row( tr );
+		var row = badBlocks.row( tr );
 		var idx = $.inArray( tr.attr('id'), detailRows );
 
 		if ( row.child.isShown() ) {
