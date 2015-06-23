@@ -1,7 +1,6 @@
 'use strict'
 
 // Load utilities
-var _ = require('lodash');
 var config = require('./lib/utils/config');
 var formatter = require('./lib/utils/formatter');
 
