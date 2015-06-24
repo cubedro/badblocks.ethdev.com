@@ -29,6 +29,7 @@ var jsonrpc = require('node-express-json-rpc2');
 
 // App setup
 app.set('port', process.env.PORT || 3005);
+app.set('trust proxy', true);
 
 if( process.env.NODE_ENV !== 'production')
 {
