@@ -26,8 +26,7 @@ function format ( d ) {
 					return 0;
 				},
 				"orderable" : false,
-				"searchable" : false,
-				// "defaultContent" : ""
+				"searchable" : false
 			},
 			{
 				"class" : "details-control",
