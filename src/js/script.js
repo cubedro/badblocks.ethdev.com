@@ -32,8 +32,8 @@ function format ( d ) {
 				"class" : "details-control",
 				"mData" : "block",
 				"render" : function (data, type, row) {
-					if(data.length > 25) {
-						data = data.substring(0,24) + "...";
+					if(data.length > 65) {
+						data = data.substring(0,64) + "...";
 					}
 					return data;
 				},
