@@ -1,5 +1,5 @@
 function format ( d ) {
-	return "<pre><code>" + JSON.stringify(d.info, null, '\t') + "</code></pre>";
+	return "<pre><code>" + JSON.stringify(d, null, '\t') + "</code></pre>";
 }
 
 (function() {
