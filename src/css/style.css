@@ -342,6 +342,7 @@ td.details-control {
     background: url('../images/details_open.png') no-repeat left center;
     padding-left: 30px !important;
     cursor: pointer;
+    text-overflow: ellipsis;
 }
 tr.details td.details-control {
     background: url('../images/details_close.png') no-repeat left center;
