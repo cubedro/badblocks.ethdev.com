@@ -31,6 +31,12 @@ function format ( d ) {
 			{
 				"class" : "details-control",
 				"mData" : "block",
+				"render" : function (data, type, row) {
+					if(data.length > 25) {
+						data = data.substring(0,24) + "...";
+					}
+					return data;
+				},
 				"name" : "block"
 			},
 			{ "mData" : "errorType", "name" : "errorType" },
