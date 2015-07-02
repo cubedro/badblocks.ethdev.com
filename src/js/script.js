@@ -37,6 +37,7 @@ function format ( d ) {
 					}
 					return data;
 				},
+				"orderable" : false,
 				"name" : "block"
 			},
 			{ "mData" : "errorType", "name" : "errorType" },
